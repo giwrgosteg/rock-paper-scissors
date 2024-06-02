@@ -33,27 +33,27 @@ function playRound(humanChoice, computerChoise) {
             return 0;
         }
         else if (humanChoice == "rock" && computerChoise == "scissors") {
-            console.log("You win, "  + humanChoice + " beats " + computerChoise);
+            alert("You win, "  + humanChoice + " beats " + computerChoise);
             return 1;
         }
         else if (humanChoice == "paper" && computerChoise == "rock") {
-            console.log("You win, "  + humanChoice + " beats " + computerChoise);
+            alert("You win, "  + humanChoice + " beats " + computerChoise);
             return 1;
         }
         else if (humanChoice == "scissors" && computerChoise == "paper") {
-            console.log("You win, "  + humanChoice + " beats " + computerChoise);
+            alert("You win, "  + humanChoice + " beats " + computerChoise);
             return 1;
         }
         else if (humanChoice == "rock" && computerChoise == "paper") {
-            console.log("You lose, " + computerChoise +" beats " + computerChoise);
+            alert("You lose, " + computerChoise +" beats " + computerChoise);
             return -1;
         }
         else if (humanChoice == "scissors" && computerChoise == "rock") {
-            console.log("You lose, " + computerChoise +" beats " + computerChoise);
+            alert("You lose, " + computerChoise +" beats " + computerChoise);
             return -1;
         }
         else if (humanChoice == "paper" && computerChoise == "scissors") {
-            console.lot("You lose, " + computerChoise +" beats " + computerChoise);
+            alert("You lose, " + humanChoice +" beats " + computerChoise);
             return -1;
         }
     }
