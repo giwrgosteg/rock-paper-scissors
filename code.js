@@ -16,6 +16,7 @@ function checkHumanChoice(humanChoice) {
     if (humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors") {
         return 1
     }
+
     else {
         return 0
     }
@@ -23,41 +24,52 @@ function checkHumanChoice(humanChoice) {
 
 function playRound(humanChoice, computerChoise) {
     if (checkHumanChoice(humanChoice) == 0) {
-        console.log("Invalid choice, try again!");
+        alert("Invalid choice, try again!");
         humanChoice = getHumanChoice();
         playRound(humanChoice, computerChoise);
     }
+
     else {
         if (humanChoice == computerChoise) {
             alert("Draw!");
-            return 0;
         }
-        else if (humanChoice == "rock" && computerChoise == "scissors") {
-            alert("You win, "  + humanChoice + " beats " + computerChoise);
-            return 1;
+
+        else if (humanChoice == "rock"){
+            if (computerChoise == "scissors") {
+                alert("You win, "  + humanChoice + " beats " + computerChoise);
+                humanScore += 1;
+            }
+
+            else if (computerChoise == "paper"){
+                alert("You lose, " + computerChoise +" beats " + humanChoice);
+                computerScore += 1;
+            }
         }
-        else if (humanChoice == "paper" && computerChoise == "rock") {
-            alert("You win, "  + humanChoice + " beats " + computerChoise);
-            return 1;
+        
+        else if (humanChoice == "paper") {
+            if (computerChoise == "rock") {
+                alert("You win, "  + humanChoice + " beats " + computerChoise);
+                humanScore += 1;
+            }
+            
+            else if (computerChoise == "scissors") {
+                alert("You lose, " + humanChoice +" beats " + computerChoise);
+                computerScore += 1;
+            }
         }
-        else if (humanChoice == "scissors" && computerChoise == "paper") {
-            alert("You win, "  + humanChoice + " beats " + computerChoise);
-            return 1;
-        }
-        else if (humanChoice == "rock" && computerChoise == "paper") {
-            alert("You lose, " + computerChoise +" beats " + computerChoise);
-            return -1;
-        }
-        else if (humanChoice == "scissors" && computerChoise == "rock") {
-            alert("You lose, " + computerChoise +" beats " + computerChoise);
-            return -1;
-        }
-        else if (humanChoice == "paper" && computerChoise == "scissors") {
-            alert("You lose, " + humanChoice +" beats " + computerChoise);
-            return -1;
+
+        else if (humanChoice == "scissors") {
+            if (computerChoise == "paper") {
+                alert("You win, "  + humanChoice + " beats " + computerChoise);
+                humanScore += 1;
+            }
+
+            else if (computerChoise == "rock") {
+                alert("You lose, " + computerChoise +" beats " + computerChoise);
+                computerScore += 1;
+            }
         }
     }
-    
 }
 
 function rounds() {
@@ -67,14 +79,9 @@ function rounds() {
     for (let i = 1; i <= num; i++) {
         human = getHumanChoice();
         computer = getComputerChoice();
-        humanScore += playRound(human, computer);
+        playRound(human, computer);
     }
-    if (humanScore >= 0){
-        alert("Your score is: " + humanScore);
-    }
-    else {
-        alert("Your score is: 0");
-    }
+    alert("Human score is: " + humanScore + " Computer score is: " + computerScore);
 }
 
 rounds();
