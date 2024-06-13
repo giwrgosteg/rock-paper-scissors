@@ -1,3 +1,12 @@
+const rockButton = document.getElementById("rockButton");
+const paperButton = document.getElementById("paperButton");
+const scissorsButton = document.getElementById("scissorsButton");
+const results = document.getElementById("results");
+const score = document.getElementById("score");
+const rematch = document.getElementById("rematch");
+
+rematch.style.visibility = "hidden";
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -7,81 +16,80 @@ function getComputerChoice() {
     return janken
 }
 
-function getHumanChoice() {
-    let choice = prompt("Enter a choice: (rock, paper, scissors)");
-    return choice;
-}
+function playRound(humanChoice) {
+    let computerChoise = getComputerChoice();
+    let result;
 
-function checkHumanChoice(humanChoice) {
-    if (humanChoice == "rock" || humanChoice == "paper" || humanChoice == "scissors") {
-        return 1
+    if (humanChoice == computerChoise) {
+        result = "Draw!";
     }
 
-    else {
-        return 0
-    }
-}
-
-function playRound(humanChoice, computerChoise) {
-    if (checkHumanChoice(humanChoice) == 0) {
-        alert("Invalid choice, try again!");
-        humanChoice = getHumanChoice();
-        playRound(humanChoice, computerChoise);
-    }
-
-    else {
-        if (humanChoice == computerChoise) {
-            alert("Draw!");
+    else if (humanChoice == "rock"){
+        if (computerChoise == "scissors") {
+            result = "You win, "  + humanChoice + " beats " + computerChoise;
+            humanScore += 1;
         }
 
-        else if (humanChoice == "rock"){
-            if (computerChoise == "scissors") {
-                alert("You win, "  + humanChoice + " beats " + computerChoise);
-                humanScore += 1;
-            }
-
-            else if (computerChoise == "paper"){
-                alert("You lose, " + computerChoise +" beats " + humanChoice);
-                computerScore += 1;
-            }
+        else if (computerChoise == "paper"){
+            result = "You lose, " + computerChoise +" beats " + humanChoice;
+            computerScore += 1;
+        }
+    }
+    
+    else if (humanChoice == "paper") {
+        if (computerChoise == "rock") {
+            result = "You win, "  + humanChoice + " beats " + computerChoise;
+            humanScore += 1;
         }
         
-        else if (humanChoice == "paper") {
-            if (computerChoise == "rock") {
-                alert("You win, "  + humanChoice + " beats " + computerChoise);
-                humanScore += 1;
-            }
-            
-            else if (computerChoise == "scissors") {
-                alert("You lose, " + humanChoice +" beats " + computerChoise);
-                computerScore += 1;
-            }
+        else if (computerChoise == "scissors") {
+            result = "You lose, " + humanChoice +" beats " + computerChoise;
+            computerScore += 1;
+        }
+    }
+
+    else if (humanChoice == "scissors") {
+        if (computerChoise == "paper") {
+            result = "You win, "  + humanChoice + " beats " + computerChoise;
+            humanScore += 1;
         }
 
-        else if (humanChoice == "scissors") {
-            if (computerChoise == "paper") {
-                alert("You win, "  + humanChoice + " beats " + computerChoise);
-                humanScore += 1;
-            }
-
-            else if (computerChoise == "rock") {
-                alert("You lose, " + computerChoise +" beats " + computerChoise);
-                computerScore += 1;
-            }
+        else if (computerChoise == "rock") {
+            result = "You lose, " + computerChoise +" beats " + computerChoise;
+            computerScore += 1;
         }
+    }
+
+    if (humanScore == 5) {
+        score.textContent = "Player wins!";
+        results.textContent = "";
+        rockButton.style.visibility = "hidden";
+        paperButton.style.visibility = "hidden";
+        scissorsButton.style.visibility = "hidden";
+        rematch.style.visibility = "visible";
+    }
+    else if (computerScore == 5) {
+        score.textContent = "Computer wins!";
+        results.textContent = "";
+        rockButton.style.visibility = "hidden";
+        paperButton.style.visibility = "hidden";
+        scissorsButton.style.visibility = "hidden";
+        rematch.style.visibility = "visible";
+    }
+    else {
+        score.textContent = "Player: " + humanScore + "| Computer: " + computerScore;
+        results.textContent = result;
     }
 }
 
-function rounds() {
-    let human;
-    let computer;
-    num = prompt("GIve number of rounds: ");
-    for (let i = 1; i <= num; i++) {
-        human = getHumanChoice();
-        computer = getComputerChoice();
-        playRound(human, computer);
-    }
-    alert("Human score is: " + humanScore + " Computer score is: " + computerScore);
+rockButton.onclick = () => playRound("rock");
+paperButton.onclick = () => playRound("paper");
+scissorsButton.onclick = () => playRound("scissors");
+rematch.onclick = function() {
+    rockButton.style.visibility = "visible";
+    paperButton.style.visibility = "visible";
+    scissorsButton.style.visibility = "visible";
+    rematch.style.visibility = "hidden";
+    humanScore = 0;
+    computerScore = 0;
 }
-
-rounds();

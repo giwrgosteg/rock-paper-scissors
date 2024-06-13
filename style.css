@@ -1,0 +1,19 @@
+#buttonsDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+#resultsDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+button {
+    margin: auto;
+    padding: 20px 50px;
+}
